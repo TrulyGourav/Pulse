@@ -1,4 +1,4 @@
-# 🚀 Pulse: 
+# 🚀 Pulse
 ## Event-Driven Analytics Platform (Java | Spring Boot | Kafka | Elasticsearch)
 
 A **production-grade, event-driven analytics system** built using **modern Java backend technologies** and **big-tech architectural patterns**.
