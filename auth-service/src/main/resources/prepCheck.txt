@@ -1,0 +1,22 @@
+## Why do we store ROLE_XXX instead of just USER or ADMIN?
+Spring Security internally expects roles to be prefixed with ROLE_, so using it explicitly avoids hidden magic and access-control bugs.
+
+## Why do we NOT return the User entity directly from the controller?
+Because entities are persistence models, not API contracts.
+
+Returning entities directly can:
+Expose sensitive fields (like password hashes)
+Couple API responses tightly to database schema
+Break clients when internal fields change
+Cause lazy-loading / serialization issues
+
+👉 Best practice:
+Use DTOs to control what data is exposed and keep layers decoupled.
+
+## Why do we add JwtFilter before UsernamePasswordAuthenticationFilter?
+We add JwtFilter before UsernamePasswordAuthenticationFilter so JWT-based authentication is processed first, instead of Spring Security’s default username/password (form login) mechanism.
+
+## How do refresh tokens work?
+We use short-lived access tokens for authorization and long-lived refresh tokens to reissue access tokens without re-authentication. This reduces security risk while maintaining good user experience.
+
+In production, refresh tokens should be stored securely and rotated, often backed by Redis or database for revocation.
