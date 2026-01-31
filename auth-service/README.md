@@ -1,17 +1,10 @@
 
 # 🔐 Authentication & JWT Login Flow (Industry-Grade Explanation)
 
-This document explains the **complete login flow** used in modern backend systems
-(Java + Spring Boot), exactly how **big tech companies** design authentication.
+This document explains the **complete login flow** used in this project - exactly how **big tech companies** design authentication.
 
-You can use this:
-- 📘 For revision
-- 🎯 For interview explanations
-- 🛠 As documentation for your project
 
----
-
-## 1️⃣ What Problem Are We Solving?
+## 1️⃣ Need for this Auth service?
 
 We want:
 - Secure authentication
@@ -153,33 +146,4 @@ Authorization: Bearer <refresh-token>
 ✔ JWT Access Token  
 ✔ Stateless authentication  
 ✔ JWT validation filter  
-✔ Token regeneration logic  
-
-### ❌ Not Fully Implemented (Yet)
-❌ Separate refresh token storage  
-❌ Token rotation  
-❌ Token revocation  
-❌ Logout invalidation  
-
-👉 This is **intentional** for learning and will be upgraded later using Redis.
-
----
-
-## 6️⃣ Interview-Ready Explanation
-
-> “We use short-lived access tokens for authorization and refresh tokens to reissue access tokens without re-authentication. This improves security while maintaining user experience.”
-
-Bonus:
-> “In production, refresh tokens are stored securely and rotated to prevent reuse.”
-
----
-
-## 7️⃣ Summary (One-Line)
-
-**Access Token = Permission**
-**Refresh Token = Renewal Mechanism**
-
----
-
-Happy Learning 🚀  
-This design scales to **Kafka, Microservices, and Big Tech Systems**
+✔ Token regeneration logic
