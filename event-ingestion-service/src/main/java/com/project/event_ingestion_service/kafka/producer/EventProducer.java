@@ -1,0 +1,24 @@
+package com.project.event_ingestion_service.kafka.producer;
+
+import com.project.event_ingestion_service.dto.EventRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+public class EventProducer {
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public void send(String topic, EventRequest event) {
+        try {
+            String message = objectMapper.writeValueAsString(event);
+            kafkaTemplate.send(topic, event.getEventType(), message);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to publish event");
+        }
+    }
+}
