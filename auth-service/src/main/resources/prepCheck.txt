@@ -35,4 +35,8 @@ If key = null:
 - No ordering guarantee
 - Harder analytics
 
-##
+## Why do we use 'auto-offset-reset=earliest' in analytics systems?
+Because it allows the consumer to replay all past events from the beginning when there is no committed offset.
+“We use auto-offset-reset=earliest so analytics consumers can replay historical data when needed.”
+
+
