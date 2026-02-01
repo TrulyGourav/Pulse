@@ -20,3 +20,19 @@ We add JwtFilter before UsernamePasswordAuthenticationFilter so JWT-based authen
 We use short-lived access tokens for authorization and long-lived refresh tokens to reissue access tokens without re-authentication. This reduces security risk while maintaining good user experience.
 
 In production, refresh tokens should be stored securely and rotated, often backed by Redis or database for revocation.
+
+## Why do we use eventType as Kafka message key?
+The message key decides the partition in Kafka. Kafka does this internally:
+partition = hash(key) % number_of_partitions
+
+Same key → same partition
+Same partition → order is guaranteed
+
+## What if we didn’t use a key?
+If key = null:
+
+- Kafka distributes messages randomly
+- No ordering guarantee
+- Harder analytics
+
+##
