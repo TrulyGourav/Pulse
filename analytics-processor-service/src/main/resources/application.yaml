@@ -18,5 +18,5 @@ server:
 
 jwt:
   secret: Q9pX7mL2aF8CwZsYB6JdK4E3N5V0R1UO
-  access-token-expiration: 900000      # 15 minutes
+  access-token-expiration: 86400000      # 15 minutes
   refresh-token-expiration: 604800000  # 7 days
