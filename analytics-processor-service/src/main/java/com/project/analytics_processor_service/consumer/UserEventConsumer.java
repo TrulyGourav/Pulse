@@ -14,18 +14,22 @@ public class UserEventConsumer {
     private final UserEventRepository repository;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @KafkaListener(topics = "user-events", groupId = "analytics-processor-group")
+    @KafkaListener(
+            topics = "user-events",
+            groupId = "analytics-processor-group"
+    )
     public void consume(String message) {
-
         try {
             UserEventDocument event =
                     objectMapper.readValue(message, UserEventDocument.class);
-
+            // Idempotency check
+            if (repository.existsById(event.getEventId())) {
+                return; // already processed
+            }
             repository.save(event);
-
         } catch (Exception e) {
-            // Later → DLQ
-            throw new RuntimeException("Failed to process event");
+            // Let Spring Kafka handle retry + DLQ
+            throw new RuntimeException("Failed to process event", e);
         }
     }
 }
