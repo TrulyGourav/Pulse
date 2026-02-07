@@ -8,7 +8,7 @@ import com.project.analytics_query_service.service.AnalyticsQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-        import java.util.List;
+import java.util.List;
 
 @RestController
 @RequestMapping("/analytics")
@@ -19,7 +19,7 @@ public class AnalyticsController {
     private final AnalyticsAggregationService aggregationService;
 
     @GetMapping("/events")
-    public Iterable<UserEventDocument> getAllEvents() {
+    public List<UserEventDocument> getAllEvents() {
         return service.getAllEvents();
     }
 
