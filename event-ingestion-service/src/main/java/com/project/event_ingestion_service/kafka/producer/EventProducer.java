@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 public class EventProducer {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
     public void send(String topic, EventRequest event) {
         try {
             String message = objectMapper.writeValueAsString(event);
             kafkaTemplate.send(topic, event.getEventType(), message);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to publish event");
+            throw new RuntimeException("Failed to publish event \n Error: " + e.getMessage());
         }
     }
 }
