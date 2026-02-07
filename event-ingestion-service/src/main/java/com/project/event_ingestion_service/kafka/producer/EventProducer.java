@@ -14,6 +14,9 @@ public class EventProducer {
     private final ObjectMapper objectMapper;
 
     public void send(String topic, EventRequest event) {
+        if (!event.getTimestamp().endsWith("Z")) {
+            throw new IllegalArgumentException("Timestamp must be ISO-8601 UTC");
+        }
         try {
             String message = objectMapper.writeValueAsString(event);
             kafkaTemplate.send(topic, event.getEventType(), message);

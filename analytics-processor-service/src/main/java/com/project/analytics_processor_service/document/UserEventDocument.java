@@ -20,7 +20,7 @@ public class UserEventDocument {
 
     private String eventType;
     private String userId;
-    private Instant timestamp;
+    private String timestamp;   // always store as ISO string
     private String source;
     private Map<String, Object> payload;
 }

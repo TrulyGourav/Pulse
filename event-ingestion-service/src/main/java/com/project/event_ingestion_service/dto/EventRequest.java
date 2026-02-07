@@ -15,7 +15,7 @@ public class EventRequest {
     @NotBlank
     private String eventType;
 
-    private Instant timestamp = Instant.now();
+    private String timestamp = Instant.now().toString();    // // always store as ISO string for ES
 
     @NotBlank
     private String userId;
