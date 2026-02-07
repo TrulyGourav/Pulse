@@ -8,4 +8,6 @@ server:
   port: 8084
 
 jwt:
-  secret: very_secret_key_change_in_prod
+  secret: Q9pX7mL2aF8CwZsYB6JdK4E3N5V0R1UO
+  access-token-expiration: 900000      # 15 minutes
+  refresh-token-expiration: 604800000  # 7 days

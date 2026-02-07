@@ -8,9 +8,15 @@ spring:
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
 
 server:
   port: 8083
 
   elasticsearch:
     uris: http://localhost:9200
+
+jwt:
+  secret: Q9pX7mL2aF8CwZsYB6JdK4E3N5V0R1UO
+  access-token-expiration: 900000      # 15 minutes
+  refresh-token-expiration: 604800000  # 7 days
