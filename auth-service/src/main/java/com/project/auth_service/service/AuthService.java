@@ -23,10 +23,15 @@ public class AuthService {
             throw new RuntimeException("Email already registered");
         }
 
+        Role role = Role.from(request.getRole())
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Invalid role: " + request.getRole())
+                );
+
         User user = User.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.ROLE_USER)
+                .role(role)
                 .createdAt(LocalDateTime.now())
                 .build();
 
