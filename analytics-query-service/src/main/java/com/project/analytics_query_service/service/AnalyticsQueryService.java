@@ -35,6 +35,27 @@ public class AnalyticsQueryService {
                 .collect(Collectors.toList());
     }
 
+
+    /* ---------------------------------
+       Get user's ALL events
+     --------------------------------- */
+    public List<UserEventDocument> getUserAllEvents(String userId) {
+
+        NativeQuery query = new NativeQueryBuilder()
+                .withQuery(q -> q.term(t -> t
+                        .field("userId")
+                        .value(userId)))
+                .build();
+
+        SearchHits<UserEventDocument> hits =
+                operations.search(query, UserEventDocument.class);
+
+        return hits.getSearchHits()
+                .stream()
+                .map(hit -> hit.getContent())
+                .collect(Collectors.toList());
+    }
+
     /* ---------------------------------
        Get events by eventType
      --------------------------------- */
