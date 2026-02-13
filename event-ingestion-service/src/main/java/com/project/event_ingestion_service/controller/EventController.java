@@ -29,6 +29,13 @@ public class EventController {
         logPublisher.log("INFO", "event-ingestion", traceId, "Received event request of type " + request.getEventType());
 
         try {
+            // mock DLQ - pushes directly to DLQ
+            if(request.getEventType().equals("EVENT_DLQ_TEST")){
+                producer.send("user-events-dlq", request);
+                return ResponseEntity.ok("Event published");
+            }
+
+            // normal flow
             producer.send("user-events", request);
             logPublisher.log("INFO", "event-ingestion", traceId, "Event published successfully to Kafka"
             );
